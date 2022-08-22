@@ -420,3 +420,4 @@ class E57:
             current_index += current_chunk
 
         writer.close()
+        self.image_file.close()

@@ -303,3 +303,15 @@ def test_read_color_absent(e57_path):
 def test_scan_position(e57_path):
     e57 = pye57.E57(e57_path)
     assert np.allclose(e57.scan_position(3), np.array([[3.01323456e+05, 5.04260184e+06, 1.56040279e+01]]))
+
+def test_read_written_file(e57_path):
+    output_file_path = "test_data/e57_file_write.e57"
+
+    e57 = pye57.E57(e57_path)
+    data_raw = e57.read_scan_raw(0)
+
+    e57_write = pye57.E57(output_file_path, mode='w')
+    e57_write.write_scan_raw(data_raw)
+
+    _ = pye57.E57(output_file_path)
+
